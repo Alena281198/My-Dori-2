@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jurnal Harian</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+        body { font-family: 'Poppins', sans-serif; text-align: center; background-color: #fef5e7; margin: 0; padding: 0; }
+        .container { max-width: 500px; margin: 40px auto; background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); }
+        .nav { margin-bottom: 20px; }
+        .nav a { margin: 0 10px; text-decoration: none; color: #ff7b54; font-weight: 600; }
+        .question { margin-bottom: 15px; text-align: left; }
+        label { font-weight: 600; display: block; margin-bottom: 5px; color: #333; }
+        input, select { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; }
+        button { margin-top: 15px; padding: 12px; width: 100%; border: none; background-color: #ff7b54; color: white; font-size: 16px; border-radius: 8px; cursor: pointer; }
+        button:hover { background-color: #ff5733; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Jurnal Harian</h1>
+        <div class="nav">
+            <a href="index.html">Isi Jurnal</a>
+            <a href="history.html">Lihat Jurnal</a>
+        </div>
+
+        <div class="question">
+            <label>Apa tantangan hari ini?</label>
+            <input type="text" id="difficulty" placeholder="Tulis tantanganmu di sini...">
+        </div>
+
+        <div class="question">
+            <label>Bagaimana cara mengatasinya?</label>
+            <input type="text" id="solution" placeholder="Bagikan caramu mengatasinya...">
+        </div>
+
+        <div class="question">
+            <label>Bagaimana perasaanmu?</label>
+            <select id="emotion">
+                <option value="Menangis">😢 Menangis</option>
+                <option value="Sedih">😔 Sedih</option>
+                <option value="Kecewa">😞 Kecewa</option>
+                <option value="Marah">😠 Marah</option>
+                <option value="Biasa saja">😐 Biasa Saja</option>
+                <option value="Senang">😊 Senang</option>
+                <option value="Bahagia">😄 Bahagia</option>
+            </select>
+        </div>
+
+        <div class="question">
+            <label>Sebutkan 3 hal yang kamu syukuri:</label>
+            <input type="text" id="gratitude" placeholder="Tulis hal-hal yang kamu syukuri...">
+        </div>
+
+        <div class="question">
+            <label>Satu kata positif untuk besok:</label>
+            <input type="text" id="positiveWord" placeholder="Tulis satu kata positif...">
+        </div>
+
+        <button onclick="saveJournal()">Simpan Jurnal</button>
+    </div>
+
+    <script>
+        function saveJournal() {
+            let date = new Date().toISOString().split('T')[0];
+            let journal = {
+                date: date,
+                difficulty: document.getElementById("difficulty").value,
+                solution: document.getElementById("solution").value,
+                emotion: document.getElementById("emotion").value,
+                gratitude: document.getElementById("gratitude").value,
+                positiveWord: document.getElementById("positiveWord").value
+            };
+            localStorage.setItem("journal_" + date, JSON.stringify(journal));
+            alert("Jurnal tersimpan!");
+        }
+    </script>
+</body>
+</html>

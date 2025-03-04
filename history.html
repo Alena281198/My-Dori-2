@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riwayat Jurnal</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+        body { font-family: 'Poppins', sans-serif; text-align: center; background-color: #fef5e7; margin: 0; padding: 0; }
+        .container { max-width: 500px; margin: 40px auto; background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); }
+        .nav { margin-bottom: 20px; }
+        .nav a { margin: 0 10px; text-decoration: none; color: #ff7b54; font-weight: 600; }
+        .journal-entry { background: #fff3e0; padding: 15px; margin: 10px 0; border-radius: 10px; text-align: left; }
+        .journal-entry strong { color: #ff7b54; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Riwayat Jurnal</h1>
+        <div class="nav">
+            <a href="index.html">Isi Jurnal</a>
+            <a href="history.html">Lihat Jurnal</a>
+        </div>
+        <div id="journalList"></div>
+    </div>
+
+    <script>
+        function loadJournals() {
+            let journalContainer = document.getElementById("journalList");
+            journalContainer.innerHTML = "";
+            
+            for (let i = 0; i < localStorage.length; i++) {
+                let key = localStorage.key(i);
+                if (key.startsWith("journal_")) {
+                    let journal = JSON.parse(localStorage.getItem(key));
+                    let entryDiv = document.createElement("div");
+                    entryDiv.classList.add("journal-entry");
+                    entryDiv.innerHTML = `
+                        <strong>Tanggal:</strong> ${journal.date} <br>
+                        <strong>Tantangan:</strong> ${journal.difficulty} <br>
+                        <strong>Cara Mengatasi:</strong> ${journal.solution} <br>
+                        <strong>Emosi:</strong> ${journal.emotion} <br>
+                        <strong>Disyukuri:</strong> ${journal.gratitude} <br>
+                        <strong>Kata Positif:</strong> ${journal.positiveWord}
+                    `;
+                    journalContainer.appendChild(entryDiv);
+                }
+            }
+        }
+        
+        window.onload = loadJournals;
+    </script>
+</body>
+</html>
